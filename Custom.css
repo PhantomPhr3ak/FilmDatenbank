@@ -1,0 +1,199 @@
+/*allgemeine Regeln*/
+html, body{
+    height: 100%;
+}
+
+body{
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    color: #6c6f73;
+}
+
+h1,h2,h3,h4,h5{
+    color: #333;
+}
+
+h6{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
+}
+
+img{
+    max-width: 100%;
+}
+
+
+/*navbar*/
+#login-img{
+    height: 2rem;
+    width: 2rem;
+}
+
+/*index.php*/
+#picture-top{
+    background: url('IMG_5534.jpg');
+    background-size: cover;
+    color: white;
+    width: 100%;
+    height: 100%;
+    
+    display: flex;
+    align-items: center;
+}
+
+#picture-top-content{
+    color: white;
+    font-size: 1.6rem;
+    max-width: 60rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#picture-top-content h1{
+    color: white;
+}
+
+#feature-one {
+    background-color: white;
+    margin: 0;
+}
+
+#feature-one > .row{
+    padding: 3rem 3rem 0rem 3rem;
+    margin: 0;
+}
+
+#feature-one-div{
+    padding: 3rem;
+    color: black;
+}
+
+#feature-one-div *{
+    color: black;
+}
+
+#feature-two{
+    background-color: #212121;
+    padding: 3rem;
+    margin: 0;
+    color: white;
+}
+
+#feature-two > h1{
+    color: white;
+}
+
+.navbar > a, div{
+    color: #FFF;
+}
+
+
+/*database.php*/
+#section-one{
+    background-color: #AAA;
+    padding: 5rem 0rem;
+}
+
+#feature-three{
+    height: auto;
+    margin: 0;
+}
+
+#feature-three .jumbotron{
+    margin: 0 !important;
+}
+
+#feature-three-left{
+    height: auto;
+    background-color: white;
+    border-radius: 0 !important;
+}
+
+#feature-three-left *{
+    color: black;
+}
+
+#feature-three-right{
+    height: auto;
+    background-color: #FF7043;
+    border-radius: 0 !important;
+}
+
+#feature-three-right *{
+    color: white;
+}
+
+/*footer*/
+footer {
+    padding: 2rem 1rem;
+    height: auto;
+    color: black;
+    background-color: #F5F5F5;
+}
+
+footer *{
+    color: black;
+}
+
+#copyright{
+    margin: 2rem 1rem auto auto;
+}
+
+/*login.php*/
+#body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: white;
+}
+
+#login-container{
+    background-color: #212121;
+    width: 100%;
+    padding: 3rem 0;
+}
+
+.checkbox > label {
+    color:black;
+}
+
+.form-signin {
+    background-color: white;
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+    border-radius: 1rem;
+}
+
+.form-signin > h1 {
+    color: black;
+}
+
+.form-signin .checkbox {
+    font-weight: 400;
+}
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
