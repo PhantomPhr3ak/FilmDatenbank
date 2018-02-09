@@ -178,7 +178,7 @@
     function searchForFilm()
     {
         //Get connection to database
-        //TODO implement youtube trailers
+        //TODO comments
         
         if(isset($_GET['search']))
             {
@@ -223,15 +223,16 @@
                         </div>
                         ';
                         //Überprüfen, ob Trailer vorhanden
-                        if($zeile->film_Trailer){
-                            echo '
+                        if($zeile->film_Trailer)
+                            {
+                                echo '
                         <div class="col-12 ">
                             <iframe src=' . $zeile->film_Trailer . ' width="560" height="315" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                         </div>';
-                        }
+                            }
                         echo '
                     </div>
-                    <div class="row">
+                    <div class="row collapse" id="commentars-'.$zeile->film_ID.'">
                         <div class="col-12">
                             ';
                         
@@ -252,14 +253,19 @@
                         $statement2->execute();
                         $res2 = $statement2->get_result();
                         
-                        while($res2->fetch_object()){
-                            echo '
+                        while ($res2->fetch_object())
+                            {
+                                echo '
                             <div class="row">
-                            
-                            </div>
-                            ';
-                        }
-                        echo'
+                                <div class="col-3">
+                                    
+                                </div>
+                                <div class="col-9">
+                                
+                                </div>
+                            </div>';
+                            }
+                        echo '
                         </div>
                     </div>
                 </div>
