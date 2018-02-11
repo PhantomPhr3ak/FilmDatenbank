@@ -1,0 +1,373 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:8889
+-- Erstellungszeit: 11. Feb 2018 um 11:20
+-- Server-Version: 5.6.35
+-- PHP-Version: 7.1.8
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Datenbank: `FilmDatenbank`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `t_Film`
+--
+
+CREATE TABLE `t_Film` (
+  `c_ID` int(11) NOT NULL,
+  `c_Name` text NOT NULL,
+  `c_Erscheinungsdatum` date NOT NULL,
+  `c_Trailer` int(11) DEFAULT NULL,
+  `c_Beschreibung` text,
+  `c_Regisseur` int(11) DEFAULT NULL,
+  `c_Produktionsunternehmen` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Daten für Tabelle `t_Film`
+--
+
+INSERT INTO `t_Film` (`c_ID`, `c_Name`, `c_Erscheinungsdatum`, `c_Trailer`, `c_Beschreibung`, `c_Regisseur`, `c_Produktionsunternehmen`) VALUES
+(1, 'Lucy', '2018-02-02', NULL, 'gute neuverfilmung', 1, 1),
+(2, 'Lucy', '2014-03-05', NULL, 'TOllER Film', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `t_KommentarBewertungen`
+--
+
+CREATE TABLE `t_KommentarBewertungen` (
+  `c_ID` int(11) NOT NULL,
+  `c_Film` int(11) NOT NULL,
+  `c_Kommentar` int(11) NOT NULL,
+  `c_User` int(11) NOT NULL,
+  `c_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `c_Wertung` int(11) DEFAULT NULL COMMENT '1=+ | 0=-'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `t_Kommentare`
+--
+
+CREATE TABLE `t_Kommentare` (
+  `c_ID` int(11) NOT NULL,
+  `c_Film` int(11) NOT NULL,
+  `c_Text` text,
+  `c_Datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `c_Verfasser` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `t_Produktionsunternehmen`
+--
+
+CREATE TABLE `t_Produktionsunternehmen` (
+  `c_ID` int(11) NOT NULL,
+  `c_Name` text NOT NULL,
+  `c_Unternehmensform` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Daten für Tabelle `t_Produktionsunternehmen`
+--
+
+INSERT INTO `t_Produktionsunternehmen` (`c_ID`, `c_Name`, `c_Unternehmensform`) VALUES
+(1, 'Paramount Pictures', 'Inc.');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `t_Regisseur`
+--
+
+CREATE TABLE `t_Regisseur` (
+  `c_ID` int(11) NOT NULL,
+  `c_Vorname` text NOT NULL,
+  `c_Nachname` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Daten für Tabelle `t_Regisseur`
+--
+
+INSERT INTO `t_Regisseur` (`c_ID`, `c_Vorname`, `c_Nachname`) VALUES
+(1, 'Test', 'Test');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `t_Schauspieler`
+--
+
+CREATE TABLE `t_Schauspieler` (
+  `c_ID` int(11) NOT NULL,
+  `c_Künstlername` text,
+  `c_Vorname` text,
+  `c_Nachname` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `t_SchauspielerInFilmen`
+--
+
+CREATE TABLE `t_SchauspielerInFilmen` (
+  `c_ID` int(11) NOT NULL,
+  `c_Film` int(11) NOT NULL,
+  `c_Schauspieler` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `t_Techniken`
+--
+
+CREATE TABLE `t_Techniken` (
+  `c_ID` int(11) NOT NULL,
+  `c_Name` varchar(255) NOT NULL,
+  `c_Beschreibung` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `t_TechnikWirdBenutztIn`
+--
+
+CREATE TABLE `t_TechnikWirdBenutztIn` (
+  `c_ID` int(11) NOT NULL,
+  `c_Technik` int(11) NOT NULL,
+  `c_Film` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `t_User`
+--
+
+CREATE TABLE `t_User` (
+  `c_ID` int(11) NOT NULL,
+  `c_Name` text NOT NULL,
+  `c_Passwort` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Daten für Tabelle `t_User`
+--
+
+INSERT INTO `t_User` (`c_ID`, `c_Name`, `c_Passwort`) VALUES
+(5, 'Luka', '827ccb0eea8a706c4c34a16891f84e7b');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `t_WirdGedrehtIn`
+--
+
+CREATE TABLE `t_WirdGedrehtIn` (
+  `c_ID` int(11) NOT NULL,
+  `c_Film` int(11) NOT NULL,
+  `c_Ort` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Indizes der exportierten Tabellen
+--
+
+--
+-- Indizes für die Tabelle `t_Film`
+--
+ALTER TABLE `t_Film`
+  ADD PRIMARY KEY (`c_ID`),
+  ADD UNIQUE KEY `t_Film_ID_uindex` (`c_ID`),
+  ADD KEY `t_Film_t_Produktionsunternehmen_c_ID_fk` (`c_Produktionsunternehmen`),
+  ADD KEY `t_Film_t_Regisseur_c_ID_fk` (`c_Regisseur`);
+
+--
+-- Indizes für die Tabelle `t_KommentarBewertungen`
+--
+ALTER TABLE `t_KommentarBewertungen`
+  ADD PRIMARY KEY (`c_ID`),
+  ADD UNIQUE KEY `t_KommentarBewertungen_c_ID_uindex` (`c_ID`);
+
+--
+-- Indizes für die Tabelle `t_Kommentare`
+--
+ALTER TABLE `t_Kommentare`
+  ADD PRIMARY KEY (`c_ID`),
+  ADD UNIQUE KEY `t_Kommentare_c_ID_uindex` (`c_ID`),
+  ADD KEY `t_Kommentare_t_Film_c_ID_fk` (`c_Film`),
+  ADD KEY `t_Kommentare_t_User_c_ID_fk` (`c_Verfasser`);
+
+--
+-- Indizes für die Tabelle `t_Produktionsunternehmen`
+--
+ALTER TABLE `t_Produktionsunternehmen`
+  ADD PRIMARY KEY (`c_ID`),
+  ADD UNIQUE KEY `t_Produktionsunternehmen_c_ID_uindex` (`c_ID`);
+
+--
+-- Indizes für die Tabelle `t_Regisseur`
+--
+ALTER TABLE `t_Regisseur`
+  ADD PRIMARY KEY (`c_ID`),
+  ADD UNIQUE KEY `t_Regisseur_ID_uindex` (`c_ID`);
+
+--
+-- Indizes für die Tabelle `t_Schauspieler`
+--
+ALTER TABLE `t_Schauspieler`
+  ADD PRIMARY KEY (`c_ID`),
+  ADD UNIQUE KEY `t_Schauspieler_ID_uindex` (`c_ID`);
+
+--
+-- Indizes für die Tabelle `t_SchauspielerInFilmen`
+--
+ALTER TABLE `t_SchauspielerInFilmen`
+  ADD PRIMARY KEY (`c_ID`),
+  ADD UNIQUE KEY `t_SpieltMitIn_c_ID_uindex` (`c_ID`),
+  ADD KEY `t_SchauspielerInFilmen_t_Film_c_ID_fk` (`c_Film`),
+  ADD KEY `t_SchauspielerInFilmen_t_Schauspieler_c_ID_fk` (`c_Schauspieler`);
+
+--
+-- Indizes für die Tabelle `t_Techniken`
+--
+ALTER TABLE `t_Techniken`
+  ADD PRIMARY KEY (`c_ID`),
+  ADD UNIQUE KEY `t_Techniken_c_ID_uindex` (`c_ID`);
+
+--
+-- Indizes für die Tabelle `t_TechnikWirdBenutztIn`
+--
+ALTER TABLE `t_TechnikWirdBenutztIn`
+  ADD PRIMARY KEY (`c_ID`),
+  ADD UNIQUE KEY `t_TechnikWirdBenutztIn_c_ID_uindex` (`c_ID`),
+  ADD KEY `t_TechnikWirdBenutztIn_t_Film_c_ID_fk` (`c_Film`),
+  ADD KEY `t_TechnikWirdBenutztIn_t_Techniken_c_ID_fk` (`c_Technik`);
+
+--
+-- Indizes für die Tabelle `t_User`
+--
+ALTER TABLE `t_User`
+  ADD PRIMARY KEY (`c_ID`),
+  ADD UNIQUE KEY `t_User_c_ID_uindex` (`c_ID`);
+
+--
+-- Indizes für die Tabelle `t_WirdGedrehtIn`
+--
+ALTER TABLE `t_WirdGedrehtIn`
+  ADD PRIMARY KEY (`c_ID`),
+  ADD UNIQUE KEY `t_WirdGedrehtIn_t_ID_uindex` (`c_ID`),
+  ADD KEY `t_WirdGedrehtIn_t_Film_c_ID_fk` (`c_Film`);
+
+--
+-- AUTO_INCREMENT für exportierte Tabellen
+--
+
+--
+-- AUTO_INCREMENT für Tabelle `t_Film`
+--
+ALTER TABLE `t_Film`
+  MODIFY `c_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT für Tabelle `t_KommentarBewertungen`
+--
+ALTER TABLE `t_KommentarBewertungen`
+  MODIFY `c_ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT für Tabelle `t_Kommentare`
+--
+ALTER TABLE `t_Kommentare`
+  MODIFY `c_ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT für Tabelle `t_Produktionsunternehmen`
+--
+ALTER TABLE `t_Produktionsunternehmen`
+  MODIFY `c_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT für Tabelle `t_Regisseur`
+--
+ALTER TABLE `t_Regisseur`
+  MODIFY `c_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT für Tabelle `t_Schauspieler`
+--
+ALTER TABLE `t_Schauspieler`
+  MODIFY `c_ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT für Tabelle `t_SchauspielerInFilmen`
+--
+ALTER TABLE `t_SchauspielerInFilmen`
+  MODIFY `c_ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT für Tabelle `t_Techniken`
+--
+ALTER TABLE `t_Techniken`
+  MODIFY `c_ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT für Tabelle `t_TechnikWirdBenutztIn`
+--
+ALTER TABLE `t_TechnikWirdBenutztIn`
+  MODIFY `c_ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT für Tabelle `t_User`
+--
+ALTER TABLE `t_User`
+  MODIFY `c_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT für Tabelle `t_WirdGedrehtIn`
+--
+ALTER TABLE `t_WirdGedrehtIn`
+  MODIFY `c_ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Constraints der exportierten Tabellen
+--
+
+--
+-- Constraints der Tabelle `t_Film`
+--
+ALTER TABLE `t_Film`
+  ADD CONSTRAINT `t_Film_t_Produktionsunternehmen_c_ID_fk` FOREIGN KEY (`c_Produktionsunternehmen`) REFERENCES `t_Produktionsunternehmen` (`c_ID`),
+  ADD CONSTRAINT `t_Film_t_Regisseur_c_ID_fk` FOREIGN KEY (`c_Regisseur`) REFERENCES `t_Regisseur` (`c_ID`);
+
+--
+-- Constraints der Tabelle `t_Kommentare`
+--
+ALTER TABLE `t_Kommentare`
+  ADD CONSTRAINT `t_Kommentare_t_Film_c_ID_fk` FOREIGN KEY (`c_Film`) REFERENCES `t_Film` (`c_ID`),
+  ADD CONSTRAINT `t_Kommentare_t_User_c_ID_fk` FOREIGN KEY (`c_Verfasser`) REFERENCES `t_User` (`c_ID`);
+
+--
+-- Constraints der Tabelle `t_SchauspielerInFilmen`
+--
+ALTER TABLE `t_SchauspielerInFilmen`
+  ADD CONSTRAINT `t_SchauspielerInFilmen_t_Film_c_ID_fk` FOREIGN KEY (`c_Film`) REFERENCES `t_Film` (`c_ID`),
+  ADD CONSTRAINT `t_SchauspielerInFilmen_t_Schauspieler_c_ID_fk` FOREIGN KEY (`c_Schauspieler`) REFERENCES `t_Schauspieler` (`c_ID`);
+
+--
+-- Constraints der Tabelle `t_TechnikWirdBenutztIn`
+--
+ALTER TABLE `t_TechnikWirdBenutztIn`
+  ADD CONSTRAINT `t_TechnikWirdBenutztIn_t_Film_c_ID_fk` FOREIGN KEY (`c_Film`) REFERENCES `t_Film` (`c_ID`),
+  ADD CONSTRAINT `t_TechnikWirdBenutztIn_t_Techniken_c_ID_fk` FOREIGN KEY (`c_Technik`) REFERENCES `t_Techniken` (`c_ID`);
+
+--
+-- Constraints der Tabelle `t_WirdGedrehtIn`
+--
+ALTER TABLE `t_WirdGedrehtIn`
+  ADD CONSTRAINT `t_WirdGedrehtIn_t_Film_c_ID_fk` FOREIGN KEY (`c_Film`) REFERENCES `t_Film` (`c_ID`);
